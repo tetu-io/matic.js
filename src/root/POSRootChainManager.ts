@@ -66,7 +66,7 @@ export default class POSRootChainManager extends ContractsBase {
     if (!this.posRootChainManager.options.address) {
       throw new Error('posRootChainManager address not found. Set it while constructing MaticPOSClient.')
     }
-    const payload = await this.exitManager.buildPayloadForExit(burnTxHash, logSignature)
+    const payload = await this.exitManager.buildPayloadForExitHermoine(burnTxHash, logSignature)
     return payload
   }
 
