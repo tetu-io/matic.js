@@ -86,6 +86,10 @@ export class MaticPOSClient extends SDKClient {
     }
   }
 
+  buildPayload(burnTxHash: string, logSignature: string, options?: SendOptions) {
+    return this.posRootChainManager.buildPayload(burnTxHash, logSignature)
+  }
+
   isERC20ExitProcessed(txHash: string) {
     if (!txHash) {
       throw new Error(`txHash not provided`)
