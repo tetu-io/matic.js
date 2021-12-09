@@ -35,13 +35,13 @@ export default class POSRootChainManager extends ContractsBase {
       options.network.abi('RootChainManager', 'pos'),
       options.posRootChainManager || options.network.Main.POSContracts.RootChainManagerProxy
     )
-    this.rootTunnelContractAbi = options.network.abi('RootTunnel', 'pos')
+    // this.rootTunnelContractAbi = options.network.abi('RootTunnel', 'pos')
     this.exitManager = new ExitManager(rootChain, options, web3Client)
-    this.erc20Predicate = options.posERC20Predicate || options.network.Main.POSContracts.ERC20PredicateProxy
-    this.erc721Predicate = options.posERC721Predicate || options.network.Main.POSContracts.ERC721PredicateProxy
-    this.erc1155Predicate = options.posERC1155Predicate || options.network.Main.POSContracts.ERC1155PredicateProxy
-    this.erc1155MintablePredicate =
-      options.posMintableERC1155Predicate || options.network.Main.POSContracts.MintableERC1155PredicateProxy
+    // this.erc20Predicate = options.posERC20Predicate || options.network.Main.POSContracts.ERC20PredicateProxy
+    // this.erc721Predicate = options.posERC721Predicate || options.network.Main.POSContracts.ERC721PredicateProxy
+    // this.erc1155Predicate = options.posERC1155Predicate || options.network.Main.POSContracts.ERC1155PredicateProxy
+    // this.erc1155MintablePredicate =
+    //   options.posMintableERC1155Predicate || options.network.Main.POSContracts.MintableERC1155PredicateProxy
   }
 
   async getPredicateAddress(rootToken: address) {
@@ -131,7 +131,7 @@ export default class POSRootChainManager extends ContractsBase {
   }
 
   async customPayload(txHash: string, eventSig: string) {
-    const payload = await this.exitManager.buildPayloadForExitHermoine(txHash, eventSig)
+    const payload = await this.exitManager.buildPayloadForExit(txHash, eventSig)
     return payload
   }
 
