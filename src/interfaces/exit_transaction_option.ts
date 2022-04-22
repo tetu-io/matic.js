@@ -8,4 +8,5 @@ export interface IExitTransactionOption extends ITransactionOption {
      * @memberof IExitTransactionOption
      */
     burnEventSignature?: string;
+    token?: string;
 }

@@ -1,9 +1,9 @@
 const fetch: (input: RequestInfo, init?: RequestInit) => Promise<Response> =
     (() => {
-        if (process.env.BUILD_ENV === "node") {
+        // if (process.env.BUILD_ENV === "node") {
             return require('node-fetch').default;
-        }
-        return window.fetch;
+        // }
+        // return window.fetch;
     })();
 
 

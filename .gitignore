@@ -16,3 +16,4 @@ dist
 config.json
 .nuxt
 docs
+scripts/data.txt

@@ -4,16 +4,12 @@ const env = dotenv.config({
   path: path.join(__dirname, '.env')
 });
 
-if (env.error) {
-  throw new Error("no env file found");
-}
-
 module.exports = {
   parent: {
     rpc: process.env.ROOT_RPC,
   },
   child: {
-    rpc: process.env.MATIC_RPC || 'https://rpc-mumbai.matic.today',
+    rpc: process.env.MATIC_RPC || 'https://polygon-rpc.com/',
   },
   pos: {
     parent: {

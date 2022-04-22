@@ -14,7 +14,7 @@ export * from "./root_chain";
 
 export class POSClient extends BridgeClient<IPOSClientConfig> {
 
-    rootChainManager: RootChainManager;
+    rootChainManager: RootChainManager | null = null;
 
     init(config: IPOSClientConfig) {
         const client = this.client;
@@ -32,12 +32,12 @@ export class POSClient extends BridgeClient<IPOSClientConfig> {
 
             this.rootChainManager = new RootChainManager(
                 this.client,
-                config.rootChainManager,
+                config.rootChainManager || '',
             );
 
             const rootChain = new RootChain(
                 this.client,
-                config.rootChain,
+                config.rootChain || '',
             );
 
             this.exitUtil = new ExitUtil(
@@ -49,28 +49,28 @@ export class POSClient extends BridgeClient<IPOSClientConfig> {
         });
     }
 
-    erc20(tokenAddress, isParent?: boolean) {
+    erc20(tokenAddress: string, isParent?: boolean) {
         return new ERC20(
             tokenAddress,
-            isParent,
+            isParent || false,
             this.client,
             this.getContracts_.bind(this)
         );
     }
 
-    erc721(tokenAddress, isParent?: boolean) {
+    erc721(tokenAddress: string, isParent?: boolean) {
         return new ERC721(
             tokenAddress,
-            isParent,
+            isParent || false,
             this.client,
             this.getContracts_.bind(this)
         );
     }
 
-    erc1155(tokenAddress, isParent?: boolean) {
+    erc1155(tokenAddress: string, isParent?: boolean) {
         return new ERC1155(
             tokenAddress,
-            isParent,
+            isParent || false,
             this.client,
             this.getContracts_.bind(this)
         );

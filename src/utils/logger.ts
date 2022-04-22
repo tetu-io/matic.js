@@ -3,7 +3,7 @@ import { ErrorHelper } from "./error_helper";
 
 export class Logger {
 
-    private isEnabled: boolean;
+    private isEnabled = false;
 
     enableLog(value) {
         this.isEnabled = value ? true : false;

@@ -12,10 +12,10 @@ export function mapPromise(values: any[], converter: Function, option: IMapPromi
   const valuesLength = values.length;
   const concurrency = option.concurrency || valuesLength;
 
-  let result = [];
+  let result: any[] = [];
   const limitPromiseRun: () => Promise<any> = () => {
     const promises = values.splice(0, concurrency);
-    return runPromises(promises, converter).then(promiseResult => {
+    return runPromises(promises, converter).then((promiseResult: any[]) => {
       result = result.concat(promiseResult);
 
       return valuesLength > result.length ?

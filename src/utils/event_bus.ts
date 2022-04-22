@@ -55,7 +55,7 @@ export class EventBus {
     }
 
     destroy() {
-        this._events = null;
+        this._events = {};
         this._ctx = null;
     }
 }
