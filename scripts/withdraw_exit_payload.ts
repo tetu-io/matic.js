@@ -1,7 +1,10 @@
 import {POSClient, setProofApi, use} from "../src";
 import Web3ClientPlugin from "../src/web3/plagin";
 import {writeFileSync} from "fs";
+import {config as dotEnvConfig} from "dotenv";
 import HDWalletProvider = require("@truffle/hdwallet-provider");
+
+dotEnvConfig();
 
 setProofApi('https://apis.matic.network/');
 use(Web3ClientPlugin);
@@ -11,10 +14,10 @@ const WETH = '0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619';
 
 const execute = async () => {
 
-  const privateKey = '6bf4f9681fb8adaa8f6683c0ad0eb11e6cce2d9733fa53069e28e05c6dd7f9a5';
-  const rpcPoly = 'https://polygon-rpc.com/';
-  const rpcMainnet = 'https://eth-mainnet.alchemyapi.io/v2/9N7SZel_kSDKC9201zJ8-SDjVrKHC2Y8';
-  const userAddress = '0xaa5734AEE4EBd75D99beB55aE469896792a0E68b';
+  const privateKey = process.env.PRIVATE_KEY;
+  const rpcPoly = process.env.RPC_POLY;
+  const rpcMainnet = process.env.RPC_ETH;
+  const userAddress = process.env.USER_ADDRESS;
 
   const client = await new POSClient().init({
     log: true,
