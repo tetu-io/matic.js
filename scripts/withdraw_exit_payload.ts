@@ -12,6 +12,36 @@ use(Web3ClientPlugin);
 const BAL = '0x9a71012b13ca4d3d0cdc72a177df3ef03b0e76a3';
 const WETH = '0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619';
 
+// *** CLAIM
+// on eth call on depositor claimAndMoveToAnotherChain()
+// depositor - https://etherscan.io/address/0xBb84098e47d217f51cB014f692eada1F2280a179#readProxyContract
+// on matic the strategy should receive BAL after 30 min
+// https://polygonscan.com/address/0x6FB3bf8FC7751E77fda80DA68b8a43637A004d8c#readProxyContract
+
+
+// *** DEPOSIT
+// -- bridge part
+// on polygon sender https://polygonscan.com/address/0xBb84098e47d217f51cB014f692eada1F2280a179#writeProxyContract
+// call withdrawAll() - first call will bridge ETH
+// save transaction hash
+// call again for bridge BAL
+// save transaction hash
+// wait checkpoint (up to 3 hours)
+// -- deposit part
+// in this script put tx hash and call `ts-node scripts/withdraw_exit_payload.ts` for ETH tx
+// on mainnet depositor https://etherscan.io/address/0xBb84098e47d217f51cB014f692eada1F2280a179#writeProxyContract
+// call depositBridgetAssets with data from the script
+// do it again for BAL tx hash
+// -- end
+
+
+// ****
+// eth strategy https://etherscan.io/address/0x308a756b4f9aa3148cad7ccf8e72c18c758b2ef2
+// eth vault https://etherscan.io/address/0xFE700D523094Cc6C673d78F1446AE0743C89586E
+// eth controller https://etherscan.io/address/0x6b2e0facd2f2a8f407ac591067ac06b5d29247e4
+
+
+
 const execute = async () => {
 
   const privateKey = process.env.PRIVATE_KEY;
@@ -39,10 +69,10 @@ const execute = async () => {
 
   const erc20Token = client.erc20(BAL, true);
 
-  // eth https://polygonscan.com/tx/0x34badcfdac3a1d8578e9571dcc0c270b34a8a541176c4598b3a376d20ad0c269
-  // bal https://polygonscan.com/tx/0x36a30297381ab1b89c0b8554c0db3f74ff92ecdf2fe4b0b748b96fb273fdda62
+  // eth 0xdd40227b96155aef86d5939ccd7769275786dbbc12d92971fe3ddc1be54db182
+  // bal 0xe8506997d0b7617d09af331cab7e0d0a99c76fb6302631c7881fa830b1773fee
 
-  const tx = '0x36a30297381ab1b89c0b8554c0db3f74ff92ecdf2fe4b0b748b96fb273fdda62';
+  const tx = '0xdd40227b96155aef86d5939ccd7769275786dbbc12d92971fe3ddc1be54db182';
 
   const payload = await erc20Token.buildPayloadForExit(tx, true);
 
