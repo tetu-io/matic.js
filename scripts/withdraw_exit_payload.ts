@@ -39,6 +39,7 @@ const WETH = '0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619';
 // eth strategy https://etherscan.io/address/0x308a756b4f9aa3148cad7ccf8e72c18c758b2ef2
 // eth vault https://etherscan.io/address/0xFE700D523094Cc6C673d78F1446AE0743C89586E
 // eth controller https://etherscan.io/address/0x6b2e0facd2f2a8f407ac591067ac06b5d29247e4
+// locker https://etherscan.io/address/0x9cc56fa7734da21ac88f6a816af10c5b898596ce
 
 
 
@@ -67,18 +68,15 @@ const execute = async () => {
     }
   });
 
-  const erc20Token = client.erc20(BAL, true);
+  const txEth = '0x526c71c3865dbde49af488a314d22a3ff172b447480b7911e537382323f98c77'.trim();
+  const payloadEth = await client.erc20(WETH, true).buildPayloadForExit(txEth, true);
+  console.log("payload eth", payloadEth);
+  writeFileSync('scripts/data_eth.txt', payloadEth);
 
-  // eth 0xdd40227b96155aef86d5939ccd7769275786dbbc12d92971fe3ddc1be54db182
-  // bal 0xe8506997d0b7617d09af331cab7e0d0a99c76fb6302631c7881fa830b1773fee
-
-  const tx = '0xdd40227b96155aef86d5939ccd7769275786dbbc12d92971fe3ddc1be54db182';
-
-  const payload = await erc20Token.buildPayloadForExit(tx, true);
-
-  console.log("payload", payload);
-
-  writeFileSync('scripts/data.txt', payload);
+  const txBAl = '0xed972f89328de738cc89e6dd401e97a8cc7844feb39d7507f40882607e5074be'.trim();
+  const payloadBal = await client.erc20(BAL, true).buildPayloadForExit(txBAl, true);
+  console.log("payloadBal", payloadBal);
+  writeFileSync('scripts/data_bal.txt', payloadBal);
 
 };
 

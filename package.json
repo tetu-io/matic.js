@@ -13,6 +13,7 @@
     "types"
   ],
   "scripts": {
+    "payload": "ts-node ./scripts/withdraw_exit_payload.ts",
     "clean": "rimraf lib dist",
     "build": "npm run build:dev",
     "build:link": "npm run build && npm link",
